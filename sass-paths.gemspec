@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Sass::Paths::VERSION
   spec.authors       = ["Stafford Brunk"]
   spec.email         = ["sbrunk@customink.com"]
-  spec.summary       = %q{Write a short summary. Required.}
-  spec.description   = %q{ Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Helper methods to append directories to the SASS_PATH ENV variable}
+  spec.description   = %q{This gem provides helper methods for appending directories, gems, and bower extensions to the SASS_PATH environment variable}
+  spec.homepage      = "https://github.com/customink/sass-paths"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
