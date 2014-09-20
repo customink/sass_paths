@@ -6,8 +6,8 @@ require 'sass_paths/version'
 Gem::Specification.new do |spec|
   spec.name          = "sass_paths"
   spec.version       = SassPaths::VERSION
-  spec.authors       = ["Stafford Brunk"]
-  spec.email         = ["sbrunk@customink.com"]
+  spec.authors       = ["Stafford Brunk", "Jonathan Lehman"]
+  spec.email         = ["sbrunk@customink.com", "jlehman@customink.com"]
   spec.summary       = %q{Helper methods to append directories to the SASS_PATH ENV variable}
   spec.description   = %q{This gem provides helper methods for appending directories, gems, and bower extensions to the SASS_PATH environment variable}
   spec.homepage      = "https://github.com/customink/sass_paths"

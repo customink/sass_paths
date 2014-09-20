@@ -6,6 +6,7 @@ require 'sass'
 module SassPaths
   class << self
     include Gem
+    include Bower
 
     def append(*paths)
       new_paths = [env_path.split(File::PATH_SEPARATOR), paths].flatten
@@ -16,6 +17,11 @@ module SassPaths
 
     def append_gem_path(gem, path)
       append(gem_sass_path(gem, path))
+    end
+
+    def append_bower_components(relative_bower_path)
+      sass_paths = get_bower_sass_paths(relative_bower_path)
+      append(sass_paths)
     end
 
     def env_path
