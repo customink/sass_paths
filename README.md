@@ -49,7 +49,7 @@ SassPaths.append_gem_path(gem_name, directory)
 
 In order to append the Sass files within a bower components directory, call
 `append_bower_components` with the name of the directory where the components
-are installed. 
+are installed.
 
 ```ruby
 SassPaths.append_bower_components('directory')
@@ -62,3 +62,9 @@ Create an initializer and utilize the above methods.
 ### Not Rails
 
 Use the above methods in some part of your application's boot process.
+
+## Testing
+
+* Run `bundle install` to install development dependencies.
+* Run `bower install` from `test/` to install bower components for testing.
+* Run `rake test` to run all tests.
