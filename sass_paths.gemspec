@@ -23,5 +23,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest"
   spec.add_development_dependency "susy"
 
-  spec.add_dependency "sass"
+  spec.add_dependency "sass", '~> 3.2'
 end
