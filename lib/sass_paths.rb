@@ -9,9 +9,10 @@ module SassPaths
     include Bower
 
     def append(*paths)
-      new_paths = [env_path.split(File::PATH_SEPARATOR), paths].flatten
-                                                               .compact
-                                                               .uniq
+      existing_paths = paths.select { |path| Dir.exists? path }
+      new_paths = [env_path.split(File::PATH_SEPARATOR), existing_paths].flatten
+                                                                        .compact
+                                                                        .uniq
       ENV["SASS_PATH"] = new_paths.join(File::PATH_SEPARATOR)
     end
 
@@ -21,7 +22,7 @@ module SassPaths
 
     def append_bower_components(relative_bower_path)
       sass_paths = get_bower_sass_paths(relative_bower_path)
-      append(sass_paths)
+      append(*sass_paths)
     end
 
     def env_path
