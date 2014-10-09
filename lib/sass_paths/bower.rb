@@ -3,6 +3,8 @@ require 'json'
 module SassPaths
   module Bower
 
+    private
+
     PERMITTED_FILE_EXTENSIONS = ['.scss', '.sass'].freeze
 
     def get_bower_sass_paths(bower_path)
