@@ -9,7 +9,7 @@ module SassPaths
     include Bower
 
     def append(*paths)
-      existing_paths = paths.select { |path| Dir.exists? path }
+      existing_paths = paths.select { |path| Dir.exist? path }
       new_paths = [env_path.split(File::PATH_SEPARATOR), existing_paths].flatten
                                                                         .compact
                                                                         .uniq
