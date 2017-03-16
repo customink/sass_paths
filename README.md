@@ -44,6 +44,23 @@ well as the directory within the gem that contains the Sass files.
 SassPaths.append_gem_path(gem_name, directory)
 ```
 
+#### Temporary Replacements
+
+Sometimes it can be fun to change the Sass paths for the duration of a block. For example, this would swap out using [Neat](http://neat.bourbon.io) versions.
+
+```ruby
+replacements = {
+  "/gems/neat-1.8.0/app/assets/stylesheets" => "/gems/neat-2.0.0/core"
+}
+SassPaths.with_replacements(replacements) do
+  options = { load_paths: Sass.load_paths }
+  Sass::Engine.new(template, options).render
+end
+```
+
+The `with_replacements` takes no responsiblity for knowing about the paths passed in as being valid or not.
+
+
 ### Rails
 
 Create an initializer and utilize the above methods.
