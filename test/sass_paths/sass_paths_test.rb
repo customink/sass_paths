@@ -32,18 +32,7 @@ module SassPaths
       ENV['SASS_PATH'] = 'lib/sass_paths:lib'
       SassPaths.append_gem_path('susy', 'sass')
       assert ENV['SASS_PATH'].include? 'lib/sass_paths:lib'
-      assert ENV['SASS_PATH'].match /gems\/susy-[\d\.]+\/sass/
-    end
-  end
-
-  describe '#append_bower_components' do
-    it 'appends bower paths to SASS_PATH ENV' do
-      ENV['SASS_PATH'] = 'lib/sass_paths:lib'
-      SassPaths.append_bower_components('.')
-      assert ENV['SASS_PATH'].include? 'lib/sass_paths:lib'
-      assert ENV['SASS_PATH'].match /bower_components\/susy\/sass/
-      assert ENV['SASS_PATH'].match /bower_components\/sassy-maps\/sass/
-      refute ENV['SASS_PATH'].match /bower_components\/jquery/
+      assert ENV['SASS_PATH'].match(/gems\/susy-[\d\.]+\/sass/)
     end
   end
 
@@ -62,5 +51,4 @@ module SassPaths
       assert_equal 'lib:lib/sass_paths', ENV['SASS_PATH']
     end
   end
-
 end

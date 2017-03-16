@@ -1,7 +1,6 @@
 # SassPaths
 
-This gem provides helper methods for appending directories, gems, and bower
-extensions to the `SASS_PATH` environment variable. This enables you to load
+This gem provides helper methods for appending directories and gems to the `SASS_PATH` environment variable. This enables you to load
 projects that do not themselves register with SASS.
 
 ## Installation
@@ -45,16 +44,6 @@ well as the directory within the gem that contains the Sass files.
 SassPaths.append_gem_path(gem_name, directory)
 ```
 
-#### Bower Components
-
-In order to append the Sass files within a bower components directory, call
-`append_bower_components` with the name of the directory where the components
-are installed.
-
-```ruby
-SassPaths.append_bower_components('directory')
-```
-
 ### Rails
 
 Create an initializer and utilize the above methods.
@@ -66,5 +55,4 @@ Use the above methods in some part of your application's boot process.
 ## Testing
 
 * Run `bundle install` to install development dependencies.
-* Run `bower install` from `test/` to install bower components for testing.
 * Run `rake test` to run all tests.
