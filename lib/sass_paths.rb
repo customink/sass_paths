@@ -1,32 +1,30 @@
-require "sass_paths/gem"
-require "sass_paths/bower"
-require "sass_paths/version"
+require 'sass_paths/gem'
+require 'sass_paths/version'
 require 'sass'
 
 module SassPaths
   class << self
     include Gem
-    include Bower
 
     def append(*paths)
-      existing_paths = paths.select { |path| Dir.exists? path }
-      new_paths = [env_path.split(File::PATH_SEPARATOR), existing_paths].flatten
-                                                                        .compact
-                                                                        .uniq
-      ENV["SASS_PATH"] = new_paths.join(File::PATH_SEPARATOR)
+      existing_paths = paths.select { |path| Dir.exist? path }
+      new_paths = [
+        env_path.split(File::PATH_SEPARATOR),
+        existing_paths
+      ].flatten.compact.uniq
+      self.env_path = new_paths
     end
 
     def append_gem_path(gem, path)
       append(gem_sass_path(gem, path))
     end
 
-    def append_bower_components(relative_bower_path)
-      sass_paths = get_bower_sass_paths(relative_bower_path)
-      append(*sass_paths)
+    def env_path
+      ENV['SASS_PATH'] || ''
     end
 
-    def env_path
-      ENV["SASS_PATH"] || ""
+    def env_path=(*paths)
+      ENV['SASS_PATH'] = paths.join(File::PATH_SEPARATOR)
     end
 
     def reload_paths!
@@ -34,9 +32,21 @@ module SassPaths
       Sass.instance_variable_set('@load_paths', nil)
       Sass.load_paths
     end
+
+    def with_replacements(replacements = {})
+      reload_paths!
+      old_paths = Sass.load_paths.dup
+      tmp_paths = old_paths.map do |path|
+        replacements[path] ? replacements[path] : path
+      end
+      self.env_path = tmp_paths
+      reload_paths!
+      yield
+    ensure
+      self.env_path = old_paths
+      reload_paths!
+    end
   end
 end
 
-if defined?(Rails)
-  require 'sass_paths/rails/engine'
-end
+require 'sass_paths/rails/engine' if defined?(Rails)

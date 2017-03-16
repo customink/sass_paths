@@ -1,7 +1,6 @@
 # SassPaths
 
-This gem provides helper methods for appending directories, gems, and bower
-extensions to the `SASS_PATH` environment variable. This enables you to load
+This gem provides helper methods for appending directories and gems to the `SASS_PATH` environment variable. This enables you to load
 projects that do not themselves register with SASS.
 
 ## Installation
@@ -45,15 +44,22 @@ well as the directory within the gem that contains the Sass files.
 SassPaths.append_gem_path(gem_name, directory)
 ```
 
-#### Bower Components
+#### Temporary Replacements
 
-In order to append the Sass files within a bower components directory, call
-`append_bower_components` with the name of the directory where the components
-are installed.
+Sometimes it can be fun to change the Sass paths for the duration of a block. For example, this would swap out using [Neat](http://neat.bourbon.io) versions.
 
 ```ruby
-SassPaths.append_bower_components('directory')
+replacements = {
+  "/gems/neat-1.8.0/app/assets/stylesheets" => "/gems/neat-2.0.0/core"
+}
+SassPaths.with_replacements(replacements) do
+  options = { load_paths: Sass.load_paths }
+  Sass::Engine.new(template, options).render
+end
 ```
+
+The `with_replacements` takes no responsiblity for knowing about the paths passed in as being valid or not.
+
 
 ### Rails
 
@@ -66,5 +72,4 @@ Use the above methods in some part of your application's boot process.
 ## Testing
 
 * Run `bundle install` to install development dependencies.
-* Run `bower install` from `test/` to install bower components for testing.
 * Run `rake test` to run all tests.
