@@ -1,5 +1,7 @@
 # SassPaths
 
+[![Overall](https://img.shields.io/endpoint?style=flat&url=https://app.opslevel.com/api/service_level/8w125ChVSM8XBEzEAFvEWZZc6wKu_t-E2UwEkg2ZiA8)](https://app.opslevel.com/services/sass_paths/maturity-report)
+
 This gem provides helper methods for appending directories and gems to the `SASS_PATH` environment variable. This enables you to load
 projects that do not themselves register with SASS.
 
